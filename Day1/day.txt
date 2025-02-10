@@ -1,0 +1,2 @@
+Concepts -> CP = Sliding Window
+JavaScript -> Map, reduce, filter functions
