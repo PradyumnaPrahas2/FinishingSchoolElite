@@ -59,3 +59,38 @@
  * --------------
  * 3
  */
+import java.util.*;
+public class prog1{
+    public static int check(StringBuilder sb,long n){
+        long N=Long.parseLong(sb.toString());
+        if(n%N!=0) return 0;
+        if(N==2){
+            return 1;
+        }
+        if(N==1) return 0;
+        for(long i=2;i<N;i++){
+            if(N%i==0) return 0;
+        }
+        return 1;
+    }
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        String s=sc.next();
+        int k=sc.nextInt();
+
+        long n=Long.parseLong(s);
+        long count=0;
+        StringBuilder sb=new StringBuilder();
+        for(int i=0;i<k;i++){
+            sb.append(s.charAt(i));
+        }
+        count+=check(sb,n);
+        for(int i=k;i<s.length();i++){
+            sb.deleteCharAt(0);
+            sb.append(s.charAt(i));
+            // System.out.println(sb);
+            count+=check(sb,n);
+        }
+        System.out.println(count);
+    }
+}
