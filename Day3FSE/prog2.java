@@ -75,3 +75,43 @@
  * k <= n
  * 0 ≤ restrictedRatings.length ≤ 1000
  */
+import java.util.*;
+public class prog2{
+    public static int testMaxVal(int left,int right,int[] arr,HashSet<Integer> res){
+        HashSet<Integer> vis=new HashSet<>();
+        int sum=0;
+        for(int i=left;i<right;i++){
+            if(vis.contains(arr[i])){
+                return -1;
+            }
+            if(res.contains(arr[i])){
+                return -1;
+            }
+            vis.add(arr[i]);
+            sum+=arr[i];
+        }
+        return sum;
+    }
+    public static void main (String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int k=sc.nextInt();
+        int m=sc.nextInt();
+        int[] arr=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=sc.nextInt();
+        }
+        HashSet<Integer> restricted=new HashSet<>();
+        for(int i=0;i<m;i++){
+            restricted.add(sc.nextInt());
+        }
+
+        int maxVal=-1;
+
+        maxVal=Math.max(maxVal,testMaxVal(0,k,arr,restricted));
+        for(int i=k;i<n;i++){
+            maxVal=Math.max(maxVal,testMaxVal(i-k+1,i+1,arr,restricted));
+        }
+        System.out.print(maxVal);
+    }
+}
