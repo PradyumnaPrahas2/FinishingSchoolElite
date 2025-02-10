@@ -53,3 +53,44 @@
  * All possible sequences have no volatility as the maximum and minimum values
  * are the same, resulting in a difference of 0.
  */
+import java.util.*;
+public class prog3{
+    public static int ans=-1;
+    public static void check(int[] arr,int k){
+        TreeMap<Integer,Integer> tree=new TreeMap<>();
+        for(int i=0;i<k;i++){
+            int f=tree.getOrDefault(arr[i],0);
+            tree.put(arr[i],f+1);
+        }
+        ans=Math.max(ans,tree.lastKey()-tree.firstKey());
+        for(int i=k;i<arr.length;i++){
+            int ele=arr[i-k];
+            int f=tree.getOrDefault(ele,0);
+            if(f==1){
+                tree.remove(ele);
+            }
+            else{
+                tree.put(ele,f-1);
+            }
+            tree.put(arr[i],tree.getOrDefault(arr[i],0)+1);
+            ans=Math.max(ans,tree.lastKey()-tree.firstKey());
+        }
+    }
+    public static void main (String[] args) {
+        Scanner sc=new Scanner(System.in);
+
+        int n=sc.nextInt();
+        int l=sc.nextInt();
+        int r=sc.nextInt();
+
+        int[] arr=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=sc.nextInt();
+        }
+
+        for(int i=l;i<=r;i++){
+            check(arr,i);
+        }
+        System.out.print(ans);
+    }
+}
