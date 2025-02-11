@@ -87,10 +87,8 @@ public class prog3{
         for(int i=0;i<n;i++){
             arr[i]=sc.nextInt();
         }
-
-        for(int i=l;i<=r;i++){
-            check(arr,i);
-        }
+        check(arr,r);
+        
         System.out.print(ans);
     }
 }
