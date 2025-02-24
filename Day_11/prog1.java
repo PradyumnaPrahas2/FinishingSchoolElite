@@ -72,18 +72,18 @@ Thus, there are 6 valid ways to transfer the cargo.
  */
 import java.util.*;
 public class prog1{
-    public static long ans=0;
-    public static void backtrack(int idx,int prev,int[] large,int total,int idx2,int[] small){
+    public static int backtrack(int idx,int prev,int[] large,int total,int idx2,int[] small,int[][] dp){
         if(idx2==total){
-            ans++;
-            return;
+            return 1;
         }
-        
+        if(dp[idx][idx2]!=-1) return dp[idx][idx2];
+        int w=0;
         for(int i=idx;i<large.length;i++){
             if(large[i]+small[idx2]>=prev){
-                backtrack(i+1,large[i]+small[idx2],large,total,idx2+1,small);
+                w+=backtrack(i+1,large[i]+small[idx2],large,total,idx2+1,small,dp);
             }
         }
+        return dp[idx][idx2]=w;
     }
     public static void main (String[] args) {
         Scanner sc=new Scanner(System.in);
@@ -100,8 +100,11 @@ public class prog1{
         for(int i=0;i<y;i++){
             small[i]=sc.nextInt();
         }
+        int[][] dp=new int[x+1][y+1];
+        for(int i=0;i<x+1;i++) Arrays.fill(dp[i],-1);
+        int ans=0;
         for(int i=0;i<x;i++){
-            backtrack(i+1,large[i]+small[0],large,y,1,small);
+            ans+=backtrack(i+1,large[i]+small[0],large,y,1,small,dp);
         }
         
         System.out.print(ans);
