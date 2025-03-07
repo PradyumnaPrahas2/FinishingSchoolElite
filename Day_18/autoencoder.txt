@@ -1,0 +1,20 @@
+Design a multi layer autoencoder using pytorch
+Optimizer -> adam, Loss -> MSE
+
+Architecture
+
+I/P (28*28)
+  |
+Flatten
+  |
+Dense Relu till 128
+  |
+Dense 64 (bottleneck)
+  |
+Dense Relu till (28*28)
+  |
+Sigmoid
+  |
+Unflatten
+  |
+Output
