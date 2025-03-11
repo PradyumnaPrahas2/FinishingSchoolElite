@@ -147,17 +147,20 @@ public class prog3{
             addNode(root,Integer.parseInt(arr[i]));
         }
         
-        if(root.data<low){
-            while(root.data<low){
+        while(root!=null){
+            boolean cond1=root.val<low;
+            boolean cond2=root.val>high;
+            if(cond1){
                 root=root.right;
             }
-        }
-        else if(root.data>high){
-            while(root.data>high){
+            else if(cond2){
                 root=root.left;
             }
+            else{
+                break;
+            }
         }
-        
+
         modifytree(root,null,low,high,'n');
         
         HashMap<Integer,List<Integer>> level=new HashMap<>();
